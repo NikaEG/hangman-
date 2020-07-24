@@ -12,7 +12,6 @@ secret_word = random.choice(words)
 
 lettersnum = len(secret_word)
 
-print(" o \n/|\ \n/ \ ")
 #print('\033[91m'+" o"+'\033[0m'+" \n/|\ \n/ \ ")
 #print('\033[91m'+" o \n/"+'\033[0m'+"|\ \n/ \ ")
 #print('\033[91m'+" o \n/|"+'\033[0m'+"\ \n/ \ ")
@@ -34,23 +33,28 @@ if begin == "N":
   start = False
 if begin == "Y":
   print("Let's begin!")
+  print('\033[0m'+" o \n/|\ \n/ \ ")
   start = True
 if start == True:
-  print("The word has "+str(lettersnum)+" letters! \n")
-  while keepgoing == True:
-   #from here down needs editing! 
+  print('\033[93m'+"The word has "+str(lettersnum)+" letters! \n")
+   #while keep_going == True:
   correct_guessed = ""
-
+  all_guessed = ""
+  print(secret_word)
   while set(correct_guessed) != set(secret_word):
+    if all_guessed:
+      print("Letters guessed: "+", ".join(sorted(all_guessed)))
     guess = input("Guess: ")
+    all_guessed += guess
     if guess in secret_word:
-      print("You got a letter!")
+      print("That letter IS in the word!")
       correct_guessed += guess
     else:
-      print("That's not in the word!")
-      #loop here of hangmen prints
+      print("That letter is NOT in word!")
+      
+        #loop here of hangmen prints
 
 print("You guessed the word!")
 
 
-  print(secret_word)
+print(secret_word)
