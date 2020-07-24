@@ -6,11 +6,11 @@ words = []
 print('\033[93m'+"Welcome to hangman! \n")
 time.sleep(2)
 print("The game is simple. Guess a letter; if that letter is in the word, you get a point! If it is not in the word, a body part is added to the hangman.")
-time.sleep(4)
+time.sleep(5)
 print("Once the hangman has a head, body, two arms and two legs, you loose!")
-time.sleep(3)
+time.sleep(4)
 print("Guess all the letters in the word before the hangman is complete and you win!")
-time.sleep(3)
+time.sleep(2)
 begin = input("Would you like to continue? Y/N? \n")
 if begin == "N":
   print("Okay. Goodbye!")
@@ -19,7 +19,7 @@ elif begin == "Y":
   print("Let's begin!")
   print('\033[0m'+" o \n/|\ \n/ \ ")
   start = True
-  if start == True:
+  while start == True:
     GO = True
     man = 0
     with open("words.txt", "r") as f:
@@ -29,7 +29,6 @@ elif begin == "Y":
     secret_word = random.choice(words)
 
     letters_num = len(secret_word)
-    print(secret_word)
     print('\033[93m'+"The word has "+str(letters_num)+" letters! \n")
     correct_guessed = ""
     all_guessed = ""
@@ -66,21 +65,25 @@ elif begin == "Y":
           print('\033[91m'+" o \n/|\ \n/ \ ")
           print('\033[96m'+"You loose!")
           GO = False
-          time.sleep(3)
+          time.sleep(2)
           again1 = input('\033[91m'+"Would you like to play again? Y/N? \n")
           if again1 == "Y":
-            Start = True
+            start = True
+            GO = False
+            break
           elif again1 == "N":
-            Start = False
-            print("Okay. Bye!")
-
-  while GO == True:
-    print("\nYou guessed the word!")
-    print('\033[96m'+secret_word)
-    time.sleep(3)
-    again2 = input('\033[91m'+"Would you like to play again? Y/N? \n")
-    if again1 == "Y":
-      start = True
-    elif again1 == "N":
-      start = False
-      print("Okay. Bye!")
+            print('\033[93m'+"Okay. Bye!")
+            start = False
+            GO = False
+            break
+    if GO == True:
+      print("\nYou guessed the word!")
+      print('\033[96m'+secret_word)
+      time.sleep(3)
+      again2 = input('\033[93m'+"Would you like to play again? Y/N? \n")
+      if again2 == "Y":
+        start = True
+        GO = False
+      elif again2 == "N":
+        start = False
+        print('\033[93m'+"Okay. Bye!")  
